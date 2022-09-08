@@ -7,13 +7,13 @@ def query(url, headers, payload): return requests.post(url, headers=headers, jso
 
 def summarize(text):
     url = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
-    headers = {"Authorization": "Bearer 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"}
+    headers = {"Authorization": "Bearer API KEY"}
     return query(url, headers, {"inputs": str(text), })[0]['summary_text']
 
 
 def sentiment(text):
     url = "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment"
-    headers = {"Authorization": "Bearer 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"}
+    headers = {"Authorization": "Bearer API KEY"}
     output = query(url, headers, {"inputs": str(text), })
     li = [output[0][0]['score'], output[0][1]['score'], output[0][2]['score']]
     if max(li) == li[0]:
@@ -26,7 +26,7 @@ def sentiment(text):
 
 def genre(text, labels):
     url = "https://api-inference.huggingface.co/models/facebook/bart-large-mnli"
-    headers = {"Authorization": "Bearer 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"}
+    headers = {"Authorization": "Bearer API KEY"}
     out = query(url, headers, {"inputs": str(text), "parameters": {"candidate_labels": labels}, })
     return out['labels'][out['scores'].index(max(out['scores']))]
 
